@@ -7,6 +7,10 @@ function convertToJson(res) {
   }
 }
 
+function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
 function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
@@ -27,7 +31,16 @@ function getProductsData() {
 // add to cart button event handler
 function addToCart(e) {
   const product = products.find((item) => item.Id === e.target.dataset.id);
-  setLocalStorage("so-cart", product);
+
+  //Check if so-cart exists in local storage
+  if(getLocalStorage("so-cart")) {
+    const cart = getLocalStorage("so-cart");
+    cart.push(product);
+    setLocalStorage("so-cart", cart);
+  } else {
+    const cart = [product];
+    setLocalStorage("so-cart", cart);
+  }
 }
 
 getProductsData();
