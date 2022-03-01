@@ -33,7 +33,7 @@ function addToCart(e) {
   const product = products.find((item) => item.Id === e.target.dataset.id);
 
   //Check if so-cart exists in local storage
-  if(getLocalStorage("so-cart")) {
+  if (getLocalStorage("so-cart")) {
     const cart = getLocalStorage("so-cart");
     cart.push(product);
     setLocalStorage("so-cart", cart);
