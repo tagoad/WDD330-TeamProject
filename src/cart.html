@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Cart</title>
     <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
   </head>
   <body>
     <header class="divider">
@@ -43,39 +44,41 @@
     <main class="divider">
       <section class="products">
         <h2>My Cart</h2>
-        <ul class="product-list">
-          <!-- <li class="cart-card divider">
-            <a href="product_pages/marmot-ajax-3.html" class="cart-card__image">
-              <img
-                src="images/tents/marmot-ajax-tent-3-person-3-season-in-pale-pumpkin-terracotta~p~880rr_01~320.jpg"
-                alt="Marmot Ajax tent"
-              />
-            </a>
-            <a href="product_pages/marmot-ajax-3.html">
-              <h2 class="card__name">Marmot Ajax Tent - 3-Person, 3-Season</h2>
-            </a>
-            <p class="cart-card__color">Pale Pumpkin/Terracotta</p>
-            <p class="cart-card__quantity">qty: 1</p>
-            <p class="cart-card__price">$199.99</p>
-          </li>
-          <li class="cart-card divider">
-            <a href="product_pages/marmot-ajax-3.html" class="cart-card__image">
-              <img
-                src="images/tents/the-north-face-talus-tent-4-person-3-season-in-golden-oak-saffron-yellow~p~985rf_01~320.jpg"
-                alt="Talus Tent - 4-Person, 3-Season"
-              />
-            </a>
-            <a href="product_pages/marmot-ajax-3.html">
-              <h2 class="card__name">
-                The North Face Talus Tent - 4-Person, 3-Season
-              </h2></a
-            >
-            <p class="cart-card__color">Golden Oak/Saffron Yellow</p>
-            <p class="cart-card__quantity">qty: 1</p>
-            <p class="cart-card__price">$199.99</p>
-          </li> -->
-        </ul>
+        <ul class="product-list"></ul>
+        <div id="cart-functions">
+          <span id="cart-total">Total: $0</span>
+          <button id="checkout-button" class="button">Checkout</button>
+          <button id="clear-cart-button" onclick="clearCart()" class="button">
+            Clear Cart
+          </button>
+        </div>
       </section>
+      <template id="cart-item-template">
+        <li class="cart-card divider">
+          <a href="#" class="cart-card__image">
+            <img src="" alt="" />
+          </a>
+          <a href="#">
+            <h2 class="card__name">
+              <!-- Item Name -->
+            </h2>
+          </a>
+          <p class="cart-card__color">${entry.item.Colors[0].ColorName}</p>
+          <p class="cart-card__quantity">${entry.qty}</p>
+          <p class="cart-card__price">$${entry.finalPrice}</p>
+          <div class="cart-card__functions">
+            <div class="cart-card__add icon success">
+              <i data-feather="plus-circle"></i>
+            </div>
+            <div class="cart-card__subtract icon danger">
+              <i data-feather="minus-circle"></i>
+            </div>
+          </div>
+          <div class="cart-card__remove icon danger">
+            <i data-feather="x-circle"></i>
+          </div>
+        </li>
+      </template>
     </main>
     <footer>&copy;NOT a real business</footer>
     <script src="js/cart.js"></script>
