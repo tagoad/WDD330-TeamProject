@@ -29,11 +29,16 @@ export function getParams(param) {
   return productId;
 }
 
-export function renderListWithTemplate(templateId, parentElement, list, callback) {
+export function renderListWithTemplate(
+  templateId,
+  parentElement,
+  list,
+  callback
+) {
   const template = document.getElementById(templateId);
-  list.forEach(item => {
-      const clone = template.content.firstElementChild.cloneNode(true);
-      const renderedTemplate = callback(clone, item);
-      parentElement.appendChild(renderedTemplate);
+  list.forEach((item) => {
+    const clone = template.content.firstElementChild.cloneNode(true);
+    const renderedTemplate = callback(clone, item);
+    parentElement.appendChild(renderedTemplate);
   });
 }

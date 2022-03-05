@@ -1,1 +1,9 @@
-import t from"./productData.js";import o from"./productDetails.js";import{getParams as r}from"./utils.js";const s=new t("tents"),c=r("product"),a=new o(c,s);a.init();
+import ProductData from "./productData.js";
+import ProductDetails from "./productDetails.js";
+import { getParams } from "./utils.js";
+
+const datasource = new ProductData("tents");
+const productId = getParams("product");
+
+const product = new ProductDetails(productId, datasource);
+product.init();

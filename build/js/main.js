@@ -1,5 +1,5 @@
-import ProductData from "./productData";
-import ProductList from "./productList";
+import ProductData from "./productData.js";
+import ProductList from "./productList.js";
 
 const datasource = new ProductData("tents");
 const productList = new ProductList(

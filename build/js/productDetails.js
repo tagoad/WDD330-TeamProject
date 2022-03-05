@@ -1,4 +1,62 @@
-var o=(a,t,i)=>new Promise((s,r)=>{var l=d=>{try{c(i.next(d))}catch(e){r(e)}},n=d=>{try{c(i.throw(d))}catch(e){r(e)}},c=d=>d.done?s(d.value):Promise.resolve(d.value).then(l,n);c((i=i.apply(a,t)).next())});import{getLocalStorage as u,setLocalStorage as p}from"./utils.js";export default class h{constructor(t,i){this.productId=t,this.dataSource=i,this.product={}}init(){return o(this,null,function*(){this.product=yield this.dataSource.findProductById(this.productId),yield this.renderProductDetails(),document.getElementById("addToCart").addEventListener("click",this.addToCart.bind(this))})}addToCart(){if(u("so-cart")){const t=u("so-cart"),i=t.items.findIndex(s=>s.item.Id===this.product.Id);i===-1?t.items.push({item:this.product,qty:1,finalPrice:this.product.ListPrice}):(t.items[i].qty++,t.items[i].finalPrice=t.items[i].qty*t.items[i].item.ListPrice),t.total=t.items.reduce((s,r)=>s+r.finalPrice,0),p("so-cart",t)}else{const t={items:[{item:this.product,finalPrice:this.product.ListPrice,qty:1}],total:this.product.ListPrice};p("so-cart",t)}}renderProductDetails(){return o(this,null,function*(){const t=`
+import { getLocalStorage, setLocalStorage } from "./utils.js";
+
+export default class ProductDetails {
+  constructor(productId, dataSource) {
+    this.productId = productId;
+    this.dataSource = dataSource;
+    this.product = {};
+  }
+
+  async init() {
+    // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
+    // once we have the product details we can render out the HTML
+    this.product = await this.dataSource.findProductById(this.productId);
+    await this.renderProductDetails();
+
+    // once the HTML is rendered we can add a listener to Add to Cart button
+    // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
+    document
+      .getElementById("addToCart")
+      .addEventListener("click", this.addToCart.bind(this));
+  }
+
+  addToCart() {
+    //Check if so-cart exists in local storage
+    if (getLocalStorage("so-cart")) {
+      const cart = getLocalStorage("so-cart");
+      const index = cart.items.findIndex(
+        (item) => item.item.Id === this.product.Id
+      );
+      if (index === -1) {
+        cart.items.push({
+          item: this.product,
+          qty: 1,
+          finalPrice: this.product.ListPrice,
+        });
+      } else {
+        cart.items[index].qty++;
+        cart.items[index].finalPrice =
+          cart.items[index].qty * cart.items[index].item.ListPrice;
+      }
+      cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+      setLocalStorage("so-cart", cart);
+    } else {
+      const cart = {
+        items: [
+          {
+            item: this.product,
+            finalPrice: this.product.ListPrice,
+            qty: 1,
+          },
+        ],
+        total: this.product.ListPrice,
+      };
+      setLocalStorage("so-cart", cart);
+    }
+  }
+
+  async renderProductDetails() {
+    const details = `
             <h3 >${this.product.Brand.Id}</h3>
             <h2 class="divider">${this.product.NameWithoutBrand}</h2>
             <img
@@ -15,4 +73,8 @@ var o=(a,t,i)=>new Promise((s,r)=>{var l=d=>{try{c(i.next(d))}catch(e){r(e)}},n=
             <div class="product-detail__add">
             <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
             </div>
-        `;document.getElementById("product-details").innerHTML=t})}}
+        `;
+    // Add details to the page
+    document.getElementById("product-details").innerHTML = details;
+  }
+}
