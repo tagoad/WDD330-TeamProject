@@ -1,3 +1,5 @@
+import { loadHeaderFooter } from "./utils.js";
+
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
@@ -104,3 +106,7 @@ function clearCart() {
 }
 
 getCartContents();
+loadHeaderFooter();
+document
+  .getElementById("clear-cart-button")
+  .addEventListener("click", clearCart);

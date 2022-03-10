@@ -42,3 +42,36 @@ export function renderListWithTemplate(
     parentElement.appendChild(renderedTemplate);
   });
 }
+
+export function loadHeaderFooter() {
+  const header = document.getElementById("header");
+  const footer = document.getElementById("footer");
+  loadTemplate("../partials/header.html").then((template) =>
+    renderWithTemplate(template, header)
+  );
+  loadTemplate("../partials/footer.html").then((template) =>
+    renderWithTemplate(template, footer)
+  );
+}
+
+export async function loadTemplate(path) {
+  const contents = await fetch(path).then((res) => res.text());
+  const template = document.createElement("template");
+  template.innerHTML = contents;
+  return template;
+}
+
+export function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  callback = null
+) {
+  const clone = template.content.cloneNode(true);
+  if (callback) {
+    const renderedTemplate = callback(clone, data);
+    parentElement.appendChild(renderedTemplate);
+  } else {
+    parentElement.appendChild(clone);
+  }
+}
