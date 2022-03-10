@@ -4,9 +4,8 @@
   "description": "Boilerplate for WDD 330 SleepOutside project",
   "main": "main.js",
   "scripts": {
-    "prestart": "snowpack build",
-    "start": "node-sass --include-path sass src/css/style.scss src/css/style.css & snowpack dev",
-    "build": "node-sass --include-path sass src/css/style.scss src/css/style.css & snowpack build",
+    "start": "snowpack dev",
+    "build": "build",
     "lint": "eslint *.js src/**/*.js",
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
     "test": "jest",
