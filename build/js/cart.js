@@ -1,1 +1,106 @@
-function getLocalStorage(r){return JSON.parse(localStorage.getItem(r))}function setLocalStorage(r,e){localStorage.setItem(r,JSON.stringify(e))}function getCartContents(){let r=[];const e=getLocalStorage("so-cart");e.items?r=e.items.map(t=>renderCartItem(t)):r.push("<li class='cart-item'>No Items in Cart</li>"),document.querySelector(".product-list").innerHTML="",r.forEach(t=>{document.querySelector(".product-list").appendChild(t)}),document.querySelector("#cart-total").innerHTML=`$${e.total}`,feather.replace()}function renderCartItem(r){var e=document.querySelector("#cart-item-template"),t=e.content.firstElementChild.cloneNode(!0),i=t.querySelector(".cart-card__image").querySelector("img");i.src=r.item.Image,i.alt=r.item.Name;var c=t.querySelector(".card__name");c.innerHTML=r.item.Name;var a=t.querySelector(".cart-card__color");a.innerHTML=r.item.Colors[0].ColorName;var n=t.querySelector(".cart-card__quantity");n.innerHTML=r.qty;var o=t.querySelector(".cart-card__price");o.innerHTML=`$${r.finalPrice}`;var m=t.querySelector(".cart-card__remove");m.addEventListener("click",removeFromCart.bind(null,r.item.Id));var l=t.querySelector(".cart-card__subtract");l.addEventListener("click",decrementCart.bind(null,r.item.Id));var s=t.querySelector(".cart-card__add");return s.addEventListener("click",incrementCart.bind(null,r.item.Id)),t}function removeFromCart(r){const e=getLocalStorage("so-cart"),t=e.items.findIndex(i=>i.item.Id===r);e.items.splice(t,1),e.total=e.items.reduce((i,c)=>i+c.finalPrice,0),setLocalStorage("so-cart",e),getCartContents()}function decrementCart(r){const e=getLocalStorage("so-cart"),t=e.items.findIndex(i=>i.item.Id===r);e.items[t].qty--,e.items[t].finalPrice=e.items[t].qty*e.items[t].item.ListPrice,e.total=e.items.reduce((i,c)=>i+c.finalPrice,0),e.items[t].qty===0&&e.items.splice(t,1),setLocalStorage("so-cart",e),getCartContents()}function incrementCart(r){const e=getLocalStorage("so-cart"),t=e.items.findIndex(i=>i.item.Id===r);e.items[t].qty++,e.items[t].finalPrice=e.items[t].qty*e.items[t].item.ListPrice,e.total=e.items.reduce((i,c)=>i+c.finalPrice,0),setLocalStorage("so-cart",e),getCartContents()}function clearCart(){const r={items:[],total:0};setLocalStorage("so-cart",r),getCartContents()}getCartContents();
+function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
+function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getCartContents() {
+  let htmlItems = [];
+  const cart = getLocalStorage("so-cart");
+  if (cart.items) {
+    htmlItems = cart.items.map((item) => renderCartItem(item));
+  } else {
+    htmlItems.push("<li class='cart-item'>No Items in Cart</li>");
+  }
+  document.querySelector(".product-list").innerHTML = "";
+  htmlItems.forEach((item) => {
+    document.querySelector(".product-list").appendChild(item);
+  });
+  document.querySelector("#cart-total").innerHTML = `$${cart.total}`;
+  // Requires having feather linked in cart html
+  feather.replace();
+}
+
+function renderCartItem(entry) {
+  var template = document.querySelector("#cart-item-template");
+  var clone = template.content.firstElementChild.cloneNode(true);
+  // Set Image
+  var itemImage = clone.querySelector(".cart-card__image").querySelector("img");
+  itemImage.src = entry.item.Image;
+  itemImage.alt = entry.item.Name;
+
+  // Set Name
+  var itemName = clone.querySelector(".card__name");
+  itemName.innerHTML = entry.item.Name;
+
+  // Set Attributes
+  var itemColor = clone.querySelector(".cart-card__color");
+  itemColor.innerHTML = entry.item.Colors[0].ColorName;
+  var itemQty = clone.querySelector(".cart-card__quantity");
+  itemQty.innerHTML = entry.qty;
+  var itemPrice = clone.querySelector(".cart-card__price");
+  itemPrice.innerHTML = `$${entry.finalPrice}`;
+  var itemRemove = clone.querySelector(".cart-card__remove");
+  itemRemove.addEventListener(
+    "click",
+    removeFromCart.bind(null, entry.item.Id)
+  );
+  var itemDecrement = clone.querySelector(".cart-card__subtract");
+  itemDecrement.addEventListener(
+    "click",
+    decrementCart.bind(null, entry.item.Id)
+  );
+  var itemIncrement = clone.querySelector(".cart-card__add");
+  itemIncrement.addEventListener(
+    "click",
+    incrementCart.bind(null, entry.item.Id)
+  );
+  return clone;
+}
+
+function removeFromCart(id) {
+  const cart = getLocalStorage("so-cart");
+  const index = cart.items.findIndex((item) => item.item.Id === id);
+  cart.items.splice(index, 1);
+  cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+  setLocalStorage("so-cart", cart);
+  getCartContents();
+}
+
+function decrementCart(id) {
+  const cart = getLocalStorage("so-cart");
+  const index = cart.items.findIndex((item) => item.item.Id === id);
+  cart.items[index].qty--;
+  cart.items[index].finalPrice =
+    cart.items[index].qty * cart.items[index].item.ListPrice;
+  cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+  if (cart.items[index].qty === 0) {
+    cart.items.splice(index, 1);
+  }
+  setLocalStorage("so-cart", cart);
+  getCartContents();
+}
+
+function incrementCart(id) {
+  const cart = getLocalStorage("so-cart");
+  const index = cart.items.findIndex((item) => item.item.Id === id);
+  cart.items[index].qty++;
+  cart.items[index].finalPrice =
+    cart.items[index].qty * cart.items[index].item.ListPrice;
+  cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+  setLocalStorage("so-cart", cart);
+  getCartContents();
+}
+
+function clearCart() {
+  const cart = {
+    items: [],
+    total: 0,
+  };
+  setLocalStorage("so-cart", cart);
+  getCartContents();
+}
+
+getCartContents();

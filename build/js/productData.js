@@ -1,1 +1,26 @@
-var h=(r,t,n)=>new Promise((s,e)=>{var d=o=>{try{a(n.next(o))}catch(c){e(c)}},i=o=>{try{a(n.throw(o))}catch(c){e(c)}},a=o=>o.done?s(o.value):Promise.resolve(o.value).then(d,i);a((n=n.apply(r,t)).next())});function u(r){if(r.ok)return r.json();throw new Error("Bad Response")}export default class f{constructor(t){this.category=t,this.path=`../json/${this.category}.json`}getData(){return fetch(this.path).then(u).then(t=>t)}findProductById(t){return h(this,null,function*(){let n=yield this.getData();const s=n.find(e=>e.Id===t);return s})}}
+function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Bad Response");
+  }
+}
+
+export default class ProductData {
+  constructor(category) {
+    this.category = category;
+    this.path = `../json/${this.category}.json`;
+  }
+
+  getData() {
+    return fetch(this.path)
+      .then(convertToJson)
+      .then((data) => data);
+  }
+
+  async findProductById(id) {
+    let products = await this.getData();
+    const product = products.find((item) => item.Id === id);
+    return product;
+  }
+}

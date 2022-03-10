@@ -6,6 +6,32 @@
     <title>Sleep Outside | Cart</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://unpkg.com/feather-icons"></script>
+    <template id="cart-item-template">
+      <li class="cart-card divider">
+        <a href="#" class="cart-card__image">
+          <img src="" alt="" />
+        </a>
+        <a href="#">
+          <h2 class="card__name">
+            <!-- Item Name -->
+          </h2>
+        </a>
+        <p class="cart-card__color">${entry.item.Colors[0].ColorName}</p>
+        <p class="cart-card__quantity">${entry.qty}</p>
+        <p class="cart-card__price">$${entry.finalPrice}</p>
+        <div class="cart-card__functions">
+          <div class="cart-card__add icon success">
+            <i data-feather="plus-circle"></i>
+          </div>
+          <div class="cart-card__subtract icon danger">
+            <i data-feather="minus-circle"></i>
+          </div>
+        </div>
+        <div class="cart-card__remove icon danger">
+          <i data-feather="x-circle"></i>
+        </div>
+      </li>
+    </template>
   </head>
   <body>
     <header class="divider">
@@ -53,32 +79,6 @@
           </button>
         </div>
       </section>
-      <template id="cart-item-template">
-        <li class="cart-card divider">
-          <a href="#" class="cart-card__image">
-            <img src="" alt="" />
-          </a>
-          <a href="#">
-            <h2 class="card__name">
-              <!-- Item Name -->
-            </h2>
-          </a>
-          <p class="cart-card__color">${entry.item.Colors[0].ColorName}</p>
-          <p class="cart-card__quantity">${entry.qty}</p>
-          <p class="cart-card__price">$${entry.finalPrice}</p>
-          <div class="cart-card__functions">
-            <div class="cart-card__add icon success">
-              <i data-feather="plus-circle"></i>
-            </div>
-            <div class="cart-card__subtract icon danger">
-              <i data-feather="minus-circle"></i>
-            </div>
-          </div>
-          <div class="cart-card__remove icon danger">
-            <i data-feather="x-circle"></i>
-          </div>
-        </li>
-      </template>
     </main>
     <footer>&copy;NOT a real business</footer>
     <script src="js/cart.js"></script>
