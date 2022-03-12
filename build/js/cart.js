@@ -18,7 +18,12 @@ function getCartContents() {
   htmlItems.forEach((item) => {
     document.querySelector(".product-list").appendChild(item);
   });
-  document.querySelector("#cart-total").innerHTML = `$${cart.total}`;
+  if (cart.total > 0) {
+    document.querySelector("#cart-total").innerHTML = `$${cart.total}`;
+  } else {
+    document.querySelector("#cart-total").innerHTML = "";
+  }
+
   // Requires having feather linked in cart html
   feather.replace();
 }
@@ -41,8 +46,13 @@ function renderCartItem(entry) {
   var itemQty = clone.querySelector(".cart-card__quantity");
   itemQty.innerHTML = entry.qty;
   var itemPrice = clone.querySelector(".cart-card__price");
-  itemPrice.innerHTML = `$${entry.finalPrice}`;
+  itemPrice.innerHTML = entry.discountPrice
+    ? `<strike class="discount">$${entry.finalPrice}</strike> $${entry.discountPrice}`
+    : `$${entry.finalPrice}`;
   var itemRemove = clone.querySelector(".cart-card__remove");
+  var discountFlag = clone.querySelector(".cart__discount");
+  discountFlag.innerHTML = entry.discountPrice ? "On Sale!" : "";
+
   itemRemove.addEventListener(
     "click",
     removeFromCart.bind(null, entry.item.Id)
@@ -75,7 +85,13 @@ function decrementCart(id) {
   cart.items[index].qty--;
   cart.items[index].finalPrice =
     cart.items[index].qty * cart.items[index].item.ListPrice;
-  cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+  cart.items[index].discountPrice =
+    cart.items[index].qty * cart.items[index].item.DiscountPrice;
+  cart.total = cart.items.reduce(
+    (sum, item) =>
+      item.discountPrice ? sum + item.discountPrice : sum + item.finalPrice,
+    0
+  );
   if (cart.items[index].qty === 0) {
     cart.items.splice(index, 1);
   }
@@ -89,6 +105,8 @@ function incrementCart(id) {
   cart.items[index].qty++;
   cart.items[index].finalPrice =
     cart.items[index].qty * cart.items[index].item.ListPrice;
+  cart.items[index].discountPrice =
+    cart.items[index].qty * cart.items[index].item.DiscountPrice;
   cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
   setLocalStorage("so-cart", cart);
   getCartContents();

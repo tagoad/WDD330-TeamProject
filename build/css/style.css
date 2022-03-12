@@ -81,6 +81,10 @@ header {
   color: var(--tertiary-color);
 }
 
+.discount {
+  color: red;
+}
+
 button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
@@ -182,12 +186,29 @@ button {
 .card__name {
   font-size: 1em;
 }
+
+.card__discount {
+  position: relative;
+  left: -13%;
+  bottom: 93%;
+
+  color: red;
+  transform: rotate(-45deg);
+}
 /* End product list card */
 
 .product-detail {
   padding: 1em;
   max-width: 500px;
   margin: auto;
+}
+
+.product_discount {
+  position: relative;
+  left: -13%;
+  top: -30em;
+  color: red;
+  transform: rotate(-45deg);
 }
 
 .product-detail img {
@@ -201,6 +222,18 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+}
+
+.cart__discount {
+  position: relative;
+  grid-row: 1/3;
+  grid-column: 1;
+  font-size: medium;
+  left: -13%;
+  bottom: 5em;
+
+  color: red;
+  transform: rotate(-45deg);
 }
 
 .cart-card__image {

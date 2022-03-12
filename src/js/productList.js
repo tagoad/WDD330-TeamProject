@@ -9,7 +9,7 @@ export default class ProductList {
 
   async init() {
     const list = await this.dataSource.getData();
-    this.renderList(list.filter((product) => product.transactable));
+    this.renderList(list.filter((product) => product.Transactable));
   }
 
   renderList(list) {
@@ -37,7 +37,14 @@ export default class ProductList {
     name.innerHTML = product.NameWithoutBrand;
     // Set Price
     var price = template.querySelector(".product-card__price");
-    price.innerHTML = `$${product.ListPrice}`;
+    price.innerHTML = product.DiscountPrice
+      ? `<strike class="discount">$${product.ListPrice}</strike> $${product.DiscountPrice}`
+      : `$${product.ListPrice}`;
+
+    // Set Discount Flag
+    var discountFlag = template.querySelector(".card__discount");
+    discountFlag.innerHTML = product.DiscountPrice ? "On Sale!" : "";
+
     return template;
   }
 }
