@@ -30,6 +30,7 @@
         <div class="cart-card__remove icon danger">
           <i data-feather="x-circle"></i>
         </div>
+        <h2 class="cart__discount"></h2>
       </li>
     </template>
   </head>
@@ -72,7 +73,7 @@
         <h2>My Cart</h2>
         <ul class="product-list"></ul>
         <div id="cart-functions">
-          <span id="cart-total">Total: $0</span>
+          <span id="cart-total"></span>
           <button id="checkout-button" class="button">Checkout</button>
           <button id="clear-cart-button" onclick="clearCart()" class="button">
             Clear Cart

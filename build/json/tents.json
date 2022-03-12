@@ -19,6 +19,8 @@
       "LogoSrc": "../images/logos/marmot-160x100.jpg",
       "Name": "Marmot"
     },
+    "Transactable": true,
+    "DiscountPrice": 100,
     "ListPrice": 199.99,
     "FinalPrice": 199.99
   },
@@ -41,7 +43,8 @@
       "Id": "1440",
       "Name": "The North Face"
     },
-    "transactable": true,
+    "Transactable": true,
+    "DiscountPrice": 0,
     "ListPrice": 199.99,
     "FinalPrice": 199.99
   },
@@ -64,7 +67,8 @@
       "Id": "1440",
       "Name": "The North Face"
     },
-    "transactable": false,
+    "Transactable": false,
+    "DiscountPrice": 0,
     "ListPrice": 179.99,
     "FinalPrice": 179.99
   },
@@ -87,7 +91,8 @@
       "Id": "1440",
       "Name": "The North Face"
     },
-    "transactable": true,
+    "Transactable": true,
+    "DiscountPrice": 0,
     "ListPrice": 349.99,
     "FinalPrice": 349.99
   },
@@ -110,7 +115,8 @@
       "Id": "1308",
       "Name": "Marmot"
     },
-    "transactable": true,
+    "Transactable": false,
+    "DiscountPrice": 0,
     "ListPrice": 179.99,
     "FinalPrice": 179.99
   },
@@ -135,7 +141,8 @@
       "Id": "35027",
       "Name": "Cedar Ridge"
     },
-    "transactable": true,
+    "Transactable": true,
+    "DiscountPrice": 0,
     "ListPrice": 69.99,
     "FinalPrice": 69.99
   }

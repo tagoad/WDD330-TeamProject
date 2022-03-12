@@ -32,11 +32,14 @@ export default class ProductDetails {
           item: this.product,
           qty: 1,
           finalPrice: this.product.ListPrice,
+          discountPrice: this.product.DiscountPrice,
         });
       } else {
         cart.items[index].qty++;
         cart.items[index].finalPrice =
           cart.items[index].qty * cart.items[index].item.ListPrice;
+        cart.items[index].discountPrice =
+          cart.items[index].qty * cart.items[index].item.DiscountPrice;
       }
       cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
       setLocalStorage("so-cart", cart);
@@ -57,22 +60,30 @@ export default class ProductDetails {
 
   async renderProductDetails() {
     const details = `
-            <h3 >${this.product.Brand.Id}</h3>
+            <h3 >${this.product.Brand.Name}</h3>
             <h2 class="divider">${this.product.NameWithoutBrand}</h2>
             <img
             class="divider"
             src="${this.product.Image}"
             alt="${this.product.NameWithoutBrand}"
             />
-
-            <p class="product-card__price">$${this.product.ListPrice}</p>
+            <p class="product-card__price">${
+              this.product.DiscountPrice
+                ? `<strike class="discount">$${this.product.ListPrice}</strike> $${this.product.DiscountPrice}`
+                : `$${this.product.ListPrice}`
+            }</p>
             <p class="product__color">${this.product.Colors[0].ColorName}</p>
             <p class="product__description">
                 ${this.product.DescriptionHtmlSimple}
             </p>
             <div class="product-detail__add">
-            <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
+            <button id="addToCart" data-id="${
+              this.product.Id
+            }">Add to Cart</button>
             </div>
+            <h2 class="product_discount">${
+              this.product.DiscountPrice ? "On Sale!" : ""
+            }</h2>
         `;
     // Add details to the page
     document.getElementById("product-details").innerHTML = details;
