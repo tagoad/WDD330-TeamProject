@@ -35,7 +35,7 @@ function renderCartItem(entry) {
   var clone = template.content.firstElementChild.cloneNode(true);
   // Set Image
   var itemImage = clone.querySelector(".cart-card__image").querySelector("img");
-  itemImage.src = entry.item.Image;
+  itemImage.src = entry.item.Images.PrimaryMedium;
   itemImage.alt = entry.item.Name;
 
   // Set Name
