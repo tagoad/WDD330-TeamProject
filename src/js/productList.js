@@ -8,8 +8,9 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
-    this.renderList(list.filter((product) => product.Transactable));
+    const list = await this.dataSource.getData(this.category);
+    // this.renderList(list.filter((product) => product.Transactable));
+    this.renderList(list);
   }
 
   renderList(list) {
@@ -27,7 +28,7 @@ export default class ProductList {
     link.href += product.Id;
     // Set Image
     var image = template.querySelector("img");
-    image.src = product.Image;
+    image.src = product.Images.PrimaryMedium;
     image.alt = product.Name;
     // Set Brand
     var brand = template.querySelector(".card__brand");
