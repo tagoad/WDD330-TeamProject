@@ -5,3 +5,9 @@ const checkoutProcess = new CheckoutProcess("so-cart", "#cart-totals", ".cart_su
 checkoutProcess.init();
 
 loadHeaderFooter();
+document
+  .getElementById("submit-order-button")
+  .addEventListener("click", (e) => {
+    e.preventDefault();  
+    checkoutProcess.checkout()
+  });

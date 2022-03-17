@@ -1,9 +1,9 @@
-import ProductData from "./productData";
+import ExternalServices from "./externalServices";
 import ProductList from "./productList";
 import { loadHeaderFooter, getParams, capitalizeFirstLetter } from "./utils";
 
 const category = getParams("category");
-const datasource = new ProductData(category);
+const datasource = new ExternalServices(category);
 const productList = new ProductList(
   category,
   datasource,

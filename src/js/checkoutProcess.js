@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils"
+import ExternalServices from "./externalServices"
 
 export default class CheckoutProcess {
     constructor(key, totalSelector, itemSelector, templateSelector) {
@@ -41,6 +42,39 @@ export default class CheckoutProcess {
         totals.forEach((item) => {
             document.querySelector(this.totalSelector).innerHTML += item;
         })
+    }
+
+    packageItems(items) {
+        let output = [];
+        items.forEach((item) => {
+            output.push({
+                id: item.item.Id,
+                name: item.item.Name,
+                price: item.finalPrice,
+                quantity: item.qty
+            })
+        })
+        return output;
+    }
+
+    async checkout() {
+        let form = document.querySelector('#checkout');
+        let data = {
+            orderDate: new Date(),
+            fname: form.firstName.value,
+            lname: form.lastName.value,
+            street: form.street.value,
+            city: form.city.value,
+            state: form.state.value,
+            zip: form.zip.value,
+            cardNumber: form.cardNumber.value,
+            expiration: form.expiration.value,
+            code: form.cvv.value,
+            items: this.packageItems(this.cart.items)
+        }
+        const externalServices = new ExternalServices();
+        let response = await externalServices.checkout(data)
+        console.log(response)
     }
 
     displayCart() {

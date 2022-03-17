@@ -31,7 +31,7 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
-      <form>
+      <form id="checkout">
         <div class="left">
           <section class="shipping">
             <h2>
@@ -50,22 +50,28 @@
               <input class="form_field"type="text" name="lastName" required/>          
             </div>
             <div class="form_group">
-              <label class="form_label" for="Street">
+              <label class="form_label" for="street">
                 Street:
               </label>
-              <input class="form_field"type="text" name="Street" required/>
+              <input class="form_field"type="text" name="street" required/>
             </div>
             <div class="form_group">
-              <label class="form_label" for="State">
+              <label class="form_label" for="city">
+                City:
+              </label>
+              <input class="form_field"type="text" name="city" required/>
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="state">
                 State:
               </label>
-              <input class="form_field"type="text" name="State" required/>          
+              <input class="form_field"type="text" name="state" required/>          
             </div>
             <div class="form_group">
-              <label class="form_label" for="Zip">
+              <label class="form_label" for="zip">
                 Zip:
               </label>
-              <input class="form_field"type="text" name="Zip" required/>          
+              <input class="form_field"type="text" name="zip" required/>          
             </div>
           </section>
           <section class="payment">
@@ -101,7 +107,7 @@
               <!-- Summary -->
             </ul>
             <div id="cart-functions">
-              <button class="button" type="submit">Place Order</button>
+              <button id="submit-order-button" class="button" type="button">Place Order</button>
               <span id="cart-totals">
                 <!-- Cart Totals -->
               </span>
