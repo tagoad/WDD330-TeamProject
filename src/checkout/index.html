@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Checkout</title>
     <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="../js/checkout.js"></script>
+    <template id="cart-item-template">
+      <li class="cart-card divider">
+        <a href="#" class="cart-card__image">
+          <img src="" alt="" />
+        </a>
+        <a href="#">
+          <h2 class="card__name">
+            <!-- Item Name -->
+          </h2>
+        </a>
+        <p class="cart-card__color">${entry.item.Colors[0].ColorName}</p>
+        <p class="cart-card__quantity">${entry.qty}</p>
+        <p class="cart-card__price">$${entry.finalPrice}</p>
+        <h2 class="cart__discount"></h2>
+      </li>
+    </template>
   </head>
   <body>
     <header id="header" class="divider">
@@ -14,6 +31,84 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <form>
+        <div class="left">
+          <section class="shipping">
+            <h2>
+              Shipping Address
+            </h2>
+            <div class="form_group">
+              <label class="form_label" for="firstName">
+                First Name:
+              </label>
+              <input class="form_field"type="text" name="firstName" required/>          
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="lastName">
+                Last Name:
+              </label>
+              <input class="form_field"type="text" name="lastName" required/>          
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="Street">
+                Street:
+              </label>
+              <input class="form_field"type="text" name="Street" required/>
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="State">
+                State:
+              </label>
+              <input class="form_field"type="text" name="State" required/>          
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="Zip">
+                Zip:
+              </label>
+              <input class="form_field"type="text" name="Zip" required/>          
+            </div>
+          </section>
+          <section class="payment">
+            <h2>
+              Payment Details
+            </h2>
+            <div class="form_group">
+              <label class="form_label" for="cardNumber">
+                Credit Card Number:
+              </label>
+              <input class="form_field" type="text" name="cardNumber" required/>
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="expiration">
+                Expiration Date:
+              </label>
+              <input class="form_field" type="text" name="expiration" required/>
+            </div>
+            <div class="form_group">
+              <label class="form_label" for="cvv">
+                CVV:
+              </label>
+              <input class="form_field" type="text" name="cvv" required/>
+            </div>
+          </section>
+        </div>
+        <div class="right">
+          <section class="summary">
+            <h2>
+              Cart Summary
+            </h2>
+            <ul class="cart_summary">
+              <!-- Summary -->
+            </ul>
+            <div id="cart-functions">
+              <button class="button" type="submit">Place Order</button>
+              <span id="cart-totals">
+                <!-- Cart Totals -->
+              </span>
+            </div>
+          </section>
+        </div>
+      </form>
     </main>
     <footer id="footer">
       <!-- Footer -->
