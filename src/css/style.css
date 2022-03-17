@@ -161,7 +161,8 @@ button {
   list-style-type: none;
   padding: 0;
 }
-.product-list a, .cart_summary a {
+.product-list a,
+.cart_summary a {
   text-decoration: none;
   color: var(--dark-grey);
 }
@@ -322,7 +323,7 @@ form #cart-functions {
   width: 100%;
 }
 
-form #cart-functions button{
+form #cart-functions button {
   height: 50%;
   margin: 0 1em;
 }
@@ -361,7 +362,7 @@ form #cart-functions span h3 {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 
 .form_group label {
