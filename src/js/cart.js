@@ -20,8 +20,10 @@ function getCartContents() {
   htmlItems.forEach((item) => {
     document.querySelector(".product-list").appendChild(item);
   });
-  if (cart.total > 0) {
-    document.querySelector("#cart-total").innerHTML = `$${cart.total}`;
+  if (cart.listTotal > 0) {
+    document.querySelector(
+      "#cart-total"
+    ).innerHTML = `$${cart.listTotal.toFixed(2)}`;
   } else {
     document.querySelector("#cart-total").innerHTML = "";
   }
@@ -31,6 +33,7 @@ function getCartContents() {
 }
 
 function renderCartItem(entry) {
+  var discounted = entry.listPrice < entry.suggestedRetailPrice;
   var template = document.querySelector("#cart-item-template");
   var clone = template.content.firstElementChild.cloneNode(true);
   // Set Image
@@ -48,12 +51,14 @@ function renderCartItem(entry) {
   var itemQty = clone.querySelector(".cart-card__quantity");
   itemQty.innerHTML = entry.qty;
   var itemPrice = clone.querySelector(".cart-card__price");
-  itemPrice.innerHTML = entry.discountPrice
-    ? `<strike class="discount">$${entry.finalPrice}</strike> $${entry.discountPrice}`
-    : `$${entry.finalPrice}`;
+  itemPrice.innerHTML = discounted
+    ? `<strike class="discount">$${entry.suggestedRetailPrice.toFixed(
+        2
+      )}</strike> $${entry.listPrice.toFixed(2)}`
+    : `$${entry.listPrice.toFixed(2)}`;
   var itemRemove = clone.querySelector(".cart-card__remove");
   var discountFlag = clone.querySelector(".cart__discount");
-  discountFlag.innerHTML = entry.discountPrice ? "On Sale!" : "";
+  discountFlag.innerHTML = discounted ? "On Sale!" : "";
 
   itemRemove.addEventListener(
     "click",
@@ -76,7 +81,11 @@ function removeFromCart(id) {
   const cart = getLocalStorage("so-cart");
   const index = cart.items.findIndex((item) => item.item.Id === id);
   cart.items.splice(index, 1);
-  cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+  cart.suggestedTotal = cart.items.reduce(
+    (sum, item) => sum + item.suggestedPrice,
+    0
+  );
+  cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
   setLocalStorage("so-cart", cart);
   getCartContents();
 }
@@ -85,15 +94,15 @@ function decrementCart(id) {
   const cart = getLocalStorage("so-cart");
   const index = cart.items.findIndex((item) => item.item.Id === id);
   cart.items[index].qty--;
-  cart.items[index].finalPrice =
+  cart.items[index].suggestedRetailPrice =
+    cart.items[index].qty * cart.items[index].item.SuggestedRetailPrice;
+  cart.items[index].listPrice =
     cart.items[index].qty * cart.items[index].item.ListPrice;
-  cart.items[index].discountPrice =
-    cart.items[index].qty * cart.items[index].item.DiscountPrice;
-  cart.total = cart.items.reduce(
-    (sum, item) =>
-      item.discountPrice ? sum + item.discountPrice : sum + item.finalPrice,
+  cart.suggestedTotal = cart.items.reduce(
+    (sum, item) => sum + item.suggestedPrice,
     0
   );
+  cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
   if (cart.items[index].qty === 0) {
     cart.items.splice(index, 1);
   }
@@ -105,11 +114,15 @@ function incrementCart(id) {
   const cart = getLocalStorage("so-cart");
   const index = cart.items.findIndex((item) => item.item.Id === id);
   cart.items[index].qty++;
-  cart.items[index].finalPrice =
+  cart.items[index].suggestedRetailPrice =
+    cart.items[index].qty * cart.items[index].item.SuggestedRetailPrice;
+  cart.items[index].listPrice =
     cart.items[index].qty * cart.items[index].item.ListPrice;
-  cart.items[index].discountPrice =
-    cart.items[index].qty * cart.items[index].item.DiscountPrice;
-  cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+  cart.suggestedTotal = cart.items.reduce(
+    (sum, item) => sum + item.suggestedPrice,
+    0
+  );
+  cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
   setLocalStorage("so-cart", cart);
   getCartContents();
 }
@@ -117,7 +130,8 @@ function incrementCart(id) {
 function clearCart() {
   const cart = {
     items: [],
-    total: 0,
+    suggestedTotal: 0,
+    listTotal: 0,
   };
   setLocalStorage("so-cart", cart);
   getCartContents();

@@ -1,11 +1,11 @@
-import ProductData from "./productData";
-import ProductList from "./productList";
+import ProductData from "./productData.js";
+import ProductList from "./productList.js";
 import {
   loadHeaderFooter,
   getParams,
   capitalizeFirstLetter,
   addOrUpdateUrlParam,
-} from "./utils";
+} from "./utils.js";
 
 const category = getParams("category");
 const datasource = new ProductData(category);
