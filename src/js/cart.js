@@ -21,7 +21,9 @@ function getCartContents() {
     document.querySelector(".product-list").appendChild(item);
   });
   if (cart.listTotal > 0) {
-    document.querySelector("#cart-total").innerHTML = `$${cart.listTotal.toFixed(2)}`;
+    document.querySelector(
+      "#cart-total"
+    ).innerHTML = `$${cart.listTotal.toFixed(2)}`;
   } else {
     document.querySelector("#cart-total").innerHTML = "";
   }
@@ -31,7 +33,7 @@ function getCartContents() {
 }
 
 function renderCartItem(entry) {
-  var discounted = entry.listPrice < entry.suggestedRetailPrice
+  var discounted = entry.listPrice < entry.suggestedRetailPrice;
   var template = document.querySelector("#cart-item-template");
   var clone = template.content.firstElementChild.cloneNode(true);
   // Set Image
@@ -50,7 +52,9 @@ function renderCartItem(entry) {
   itemQty.innerHTML = entry.qty;
   var itemPrice = clone.querySelector(".cart-card__price");
   itemPrice.innerHTML = discounted
-    ? `<strike class="discount">$${entry.suggestedRetailPrice.toFixed(2)}</strike> $${entry.listPrice.toFixed(2)}`
+    ? `<strike class="discount">$${entry.suggestedRetailPrice.toFixed(
+        2
+      )}</strike> $${entry.listPrice.toFixed(2)}`
     : `$${entry.listPrice.toFixed(2)}`;
   var itemRemove = clone.querySelector(".cart-card__remove");
   var discountFlag = clone.querySelector(".cart__discount");
@@ -77,7 +81,10 @@ function removeFromCart(id) {
   const cart = getLocalStorage("so-cart");
   const index = cart.items.findIndex((item) => item.item.Id === id);
   cart.items.splice(index, 1);
-  cart.suggestedTotal = cart.items.reduce((sum, item) => sum + item.suggestedPrice, 0);
+  cart.suggestedTotal = cart.items.reduce(
+    (sum, item) => sum + item.suggestedPrice,
+    0
+  );
   cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
   setLocalStorage("so-cart", cart);
   getCartContents();
@@ -91,7 +98,10 @@ function decrementCart(id) {
     cart.items[index].qty * cart.items[index].item.SuggestedRetailPrice;
   cart.items[index].listPrice =
     cart.items[index].qty * cart.items[index].item.ListPrice;
-  cart.suggestedTotal = cart.items.reduce((sum, item) => sum + item.suggestedPrice, 0);
+  cart.suggestedTotal = cart.items.reduce(
+    (sum, item) => sum + item.suggestedPrice,
+    0
+  );
   cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
   if (cart.items[index].qty === 0) {
     cart.items.splice(index, 1);
@@ -108,7 +118,10 @@ function incrementCart(id) {
     cart.items[index].qty * cart.items[index].item.SuggestedRetailPrice;
   cart.items[index].listPrice =
     cart.items[index].qty * cart.items[index].item.ListPrice;
-  cart.suggestedTotal = cart.items.reduce((sum, item) => sum + item.suggestedPrice, 0);
+  cart.suggestedTotal = cart.items.reduce(
+    (sum, item) => sum + item.suggestedPrice,
+    0
+  );
   cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
   setLocalStorage("so-cart", cart);
   getCartContents();
@@ -118,7 +131,7 @@ function clearCart() {
   const cart = {
     items: [],
     suggestedTotal: 0,
-    listTotal: 0
+    listTotal: 0,
   };
   setLocalStorage("so-cart", cart);
   getCartContents();

@@ -39,7 +39,6 @@ export function renderListWithTemplate(
   list.forEach((item) => {
     const clone = template.content.firstElementChild.cloneNode(true);
     const renderedTemplate = callback(clone, item);
-    console.log(renderedTemplate)
     parentElement.appendChild(renderedTemplate);
   });
 }
@@ -82,8 +81,8 @@ export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function addOrUpdateUrlParam(name, value){
+export function addOrUpdateUrlParam(name, value) {
   const params = new URLSearchParams(window.location.search);
   params.set(name, value);
-  window.history.replaceState({}, '', `?${params.toString()}`);
+  window.history.replaceState({}, "", `?${params.toString()}`);
 }

@@ -5,7 +5,7 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
-    this.list = []
+    this.list = [];
   }
 
   async init() {
@@ -19,10 +19,14 @@ export default class ProductList {
     const sortBy = params.get("sortBy");
     switch (sortBy) {
       case "name-desc":
-        this.list.sort((a, b) => b.NameWithoutBrand.localeCompare(a.NameWithoutBrand));
+        this.list.sort((a, b) =>
+          b.NameWithoutBrand.localeCompare(a.NameWithoutBrand)
+        );
         break;
       case "name-asc":
-        this.list.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+        this.list.sort((a, b) =>
+          a.NameWithoutBrand.localeCompare(b.NameWithoutBrand)
+        );
         break;
       case "price-desc":
         this.list.sort((a, b) => b.ListPrice - a.ListPrice);
@@ -43,7 +47,7 @@ export default class ProductList {
   }
 
   renderTemplate(template, product) {
-    var discounted = product.ListPrice < product.SuggestedRetailPrice
+    var discounted = product.ListPrice < product.SuggestedRetailPrice;
     // Set Link
     var link = template.querySelector("a");
     link.href += product.Id;

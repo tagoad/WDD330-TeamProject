@@ -41,8 +41,14 @@ export default class ProductDetails {
         cart.items[index].listPrice =
           cart.items[index].qty * cart.items[index].item.ListPrice;
       }
-      cart.suggestedTotal = cart.items.reduce((sum, item) => sum + item.suggestedRetailPrice, 0);
-      cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
+      cart.suggestedTotal = cart.items.reduce(
+        (sum, item) => sum + item.suggestedRetailPrice,
+        0
+      );
+      cart.listTotal = cart.items.reduce(
+        (sum, item) => sum + item.listPrice,
+        0
+      );
       setLocalStorage("so-cart", cart);
     } else {
       const cart = {
@@ -62,7 +68,7 @@ export default class ProductDetails {
   }
 
   async renderProductDetails() {
-    var discounted = this.product.ListPrice < this.product.SuggestedRetailPrice
+    var discounted = this.product.ListPrice < this.product.SuggestedRetailPrice;
     const details = `
             <h3 >${this.product.Brand.Name}</h3>
             <h2 class="divider">${this.product.NameWithoutBrand}</h2>
@@ -85,9 +91,7 @@ export default class ProductDetails {
               this.product.Id
             }">Add to Cart</button>
             </div>
-            <h2 class="product_discount">${
-              discounted ? "On Sale!" : ""
-            }</h2>
+            <h2 class="product_discount">${discounted ? "On Sale!" : ""}</h2>
         `;
     // Add details to the page
     document.getElementById("product-details").innerHTML = details;
