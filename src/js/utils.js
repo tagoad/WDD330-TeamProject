@@ -39,6 +39,7 @@ export function renderListWithTemplate(
   list.forEach((item) => {
     const clone = template.content.firstElementChild.cloneNode(true);
     const renderedTemplate = callback(clone, item);
+    console.log(renderedTemplate)
     parentElement.appendChild(renderedTemplate);
   });
 }
@@ -79,4 +80,10 @@ export function renderWithTemplate(
 // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function addOrUpdateUrlParam(name, value){
+  const params = new URLSearchParams(window.location.search);
+  params.set(name, value);
+  window.history.replaceState({}, '', `?${params.toString()}`);
 }

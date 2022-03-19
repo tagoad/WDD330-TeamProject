@@ -293,3 +293,25 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.alert-card {
+
+  padding: 1em;
+}
+
+.alert-card h2 {
+  margin: 0;
+}
+
+.alert-card p {
+  margin: 0;
+}

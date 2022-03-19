@@ -1,6 +1,6 @@
 import ProductData from "./productData";
 import ProductList from "./productList";
-import { loadHeaderFooter, getParams, capitalizeFirstLetter } from "./utils";
+import { loadHeaderFooter, getParams, capitalizeFirstLetter, addOrUpdateUrlParam } from "./utils";
 
 const category = getParams("category");
 const datasource = new ProductData(category);
@@ -15,3 +15,9 @@ loadHeaderFooter();
 document.querySelector(
   ".product-list-title"
 ).innerHTML = `Top Products: ${capitalizeFirstLetter(category)}`;
+
+document.querySelector("#sort-by").addEventListener("change", (e) => {
+  const sortBy = e.target.value;
+  addOrUpdateUrlParam("sortBy", sortBy);
+  productList.renderList();
+});
