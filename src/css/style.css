@@ -189,12 +189,13 @@ button {
 
 .card__discount {
   position: relative;
-  left: -13%;
-  bottom: 93%;
-
+  text-align: center;
   color: red;
-  transform: rotate(-45deg);
+  transform: rotate(90deg);
+  bottom: 8em;
+  left: 3.5em;
 }
+
 /* End product list card */
 
 .product-detail {

@@ -31,34 +31,38 @@ export default class ProductDetails {
         cart.items.push({
           item: this.product,
           qty: 1,
-          finalPrice: this.product.ListPrice,
-          discountPrice: this.product.DiscountPrice,
+          suggestedRetailPrice: this.product.SuggestedRetailPrice,
+          listPrice: this.product.ListPrice,
         });
       } else {
         cart.items[index].qty++;
-        cart.items[index].finalPrice =
+        cart.items[index].suggestedRetailPrice =
+          cart.items[index].qty * cart.items[index].item.SuggestedRetailPrice;
+        cart.items[index].listPrice =
           cart.items[index].qty * cart.items[index].item.ListPrice;
-        cart.items[index].discountPrice =
-          cart.items[index].qty * cart.items[index].item.DiscountPrice;
       }
-      cart.total = cart.items.reduce((sum, item) => sum + item.finalPrice, 0);
+      cart.suggestedTotal = cart.items.reduce((sum, item) => sum + item.suggestedRetailPrice, 0);
+      cart.listTotal = cart.items.reduce((sum, item) => sum + item.listPrice, 0);
       setLocalStorage("so-cart", cart);
     } else {
       const cart = {
         items: [
           {
             item: this.product,
-            finalPrice: this.product.ListPrice,
+            suggestedRetailPrice: this.product.SuggestedRetailPrice,
+            listPrice: this.product.ListPrice,
             qty: 1,
           },
         ],
-        total: this.product.ListPrice,
+        suggestedTotal: this.product.SuggestedRetailPrice,
+        listTotal: this.product.ListPrice,
       };
       setLocalStorage("so-cart", cart);
     }
   }
 
   async renderProductDetails() {
+    var discounted = this.product.ListPrice < this.product.SuggestedRetailPrice
     const details = `
             <h3 >${this.product.Brand.Name}</h3>
             <h2 class="divider">${this.product.NameWithoutBrand}</h2>
@@ -68,8 +72,8 @@ export default class ProductDetails {
             alt="${this.product.NameWithoutBrand}"
             />
             <p class="product-card__price">${
-              this.product.DiscountPrice
-                ? `<strike class="discount">$${this.product.ListPrice}</strike> $${this.product.DiscountPrice}`
+              discounted
+                ? `<strike class="discount">$${this.product.SuggestedRetailPrice}</strike> $${this.product.ListPrice}`
                 : `$${this.product.ListPrice}`
             }</p>
             <p class="product__color">${this.product.Colors[0].ColorName}</p>
@@ -82,7 +86,7 @@ export default class ProductDetails {
             }">Add to Cart</button>
             </div>
             <h2 class="product_discount">${
-              this.product.DiscountPrice ? "On Sale!" : ""
+              discounted ? "On Sale!" : ""
             }</h2>
         `;
     // Add details to the page
