@@ -1,11 +1,13 @@
 const baseURL = "http://157.201.228.93:2992/";
 
 function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
-  }
+  return res.json().then((data) => {
+    if (res.ok) {
+      return data;
+    } else {
+      throw { name: "servicesError", message: data };
+    }
+  });
 }
 
 export default class ExternalServices {

@@ -399,3 +399,39 @@ section + button {
 .alert-card p {
   margin: 0;
 }
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  color: white;
+  background-color: rgb(253, 110, 110);
+}
+
+.alert p {
+  margin: 0;
+  padding: 0;
+}
+
+.alert .close {
+  cursor: pointer;
+}
+
+.success {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  color: black;
+  background-color: lightgreen;
+}
+
+.success p {
+  margin: 0;
+  padding: 0;
+}
+
+.success .close {
+  cursor: pointer;
+}

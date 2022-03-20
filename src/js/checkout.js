@@ -14,5 +14,10 @@ document
   .getElementById("submit-order-button")
   .addEventListener("click", (e) => {
     e.preventDefault();
-    checkoutProcess.checkout();
+    var myform = document.forms[0];
+    var form_status = myform.checkValidity();
+    myform.reportValidity();
+    if (form_status) {
+      checkoutProcess.checkout();
+    }
   });
