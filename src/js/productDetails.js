@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -65,6 +65,7 @@ export default class ProductDetails {
       };
       setLocalStorage("so-cart", cart);
     }
+    alertMessage("Added to cart!", "success");
   }
 
   async renderProductDetails() {
@@ -87,7 +88,7 @@ export default class ProductDetails {
                 ${this.product.DescriptionHtmlSimple}
             </p>
             <div class="product-detail__add">
-            <button id="addToCart" data-id="${
+            <button id="addToCart" class="button" data-id="${
               this.product.Id
             }">Add to Cart</button>
             </div>

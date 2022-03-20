@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils";
 import ExternalServices from "./externalServices";
 
 export default class CheckoutProcess {
@@ -26,11 +26,11 @@ export default class CheckoutProcess {
   }
 
   calculateOrderTotal() {
-    this.subTotal = this.cart.total;
+    this.subTotal = this.cart.listTotal;
     this.shipping =
       this.cart.items.length > 0 ? this.cart.items.length * 2 + 8 : 0;
-    this.tax = this.cart.total * 0.06;
-    this.total = this.cart.total + this.tax + this.shipping;
+    this.tax = this.cart.listTotal * 0.06;
+    this.total = this.cart.listTotal + this.tax + this.shipping;
   }
 
   displayOrderTotals() {
@@ -51,7 +51,7 @@ export default class CheckoutProcess {
       output.push({
         id: item.item.Id,
         name: item.item.Name,
-        price: item.finalPrice,
+        price: item.listPrice,
         quantity: item.qty,
       });
     });
@@ -74,8 +74,26 @@ export default class CheckoutProcess {
       items: this.packageItems(this.cart.items),
     };
     const externalServices = new ExternalServices();
-    let response = await externalServices.checkout(data);
-    console.log(response);
+    try {
+      let response = await externalServices.checkout(data);
+      var main = document.querySelector("main");
+      main.innerHTML = `<div><h1>Thank you for your order!</h1><h2>Order ID: ${response.orderId}</h2><a href="/">Click here to return to the home page</a></div>`;
+      this.clearCart();
+    } catch (error) {
+      // Loop through errorMessage.message object
+      for (var key in error.message) {
+        alertMessage(error.message[key]);
+      }
+    }
+  }
+
+  clearCart() {
+    const cart = {
+      items: [],
+      suggestedTotal: 0,
+      listTotal: 0,
+    };
+    setLocalStorage("so-cart", cart);
   }
 
   displayCart() {
@@ -112,9 +130,10 @@ export default class CheckoutProcess {
     var itemQty = clone.querySelector(".cart-card__quantity");
     itemQty.innerHTML = entry.qty;
     var itemPrice = clone.querySelector(".cart-card__price");
-    itemPrice.innerHTML = entry.discountPrice
-      ? `<strike class="discount">$${entry.finalPrice}</strike> $${entry.discountPrice}`
-      : `$${entry.finalPrice}`;
+    itemPrice.innerHTML =
+      entry.listPrice < entry.suggestedRetailPrice
+        ? `<strike class="discount">$${entry.suggestedRetailPrice}</strike> $${entry.listPrice}`
+        : `$${entry.listPrice}`;
     var discountFlag = clone.querySelector(".cart__discount");
     discountFlag.innerHTML = entry.discountPrice ? "On Sale!" : "";
 
