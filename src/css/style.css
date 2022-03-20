@@ -190,12 +190,13 @@ button {
 
 .card__discount {
   position: relative;
-  left: -13%;
-  bottom: 93%;
-
+  text-align: center;
   color: red;
-  transform: rotate(-45deg);
+  transform: rotate(90deg);
+  bottom: 8em;
+  left: 3.5em;
 }
+
 /* End product list card */
 
 .product-detail {
@@ -376,4 +377,25 @@ form #cart-functions span h3 {
 
 section + button {
   margin-top: 1em;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.alert-card {
+  padding: 1em;
+}
+
+.alert-card h2 {
+  margin: 0;
+}
+
+.alert-card p {
+  margin: 0;
 }

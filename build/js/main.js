@@ -1,12 +1,6 @@
-import ExternalServices from "./externalServices.js";
-import ProductList from "./productList.js";
 import { loadHeaderFooter } from "./utils.js";
+import Alert from "./alert.js";
 
-const datasource = new ExternalServices("tents");
-const productList = new ProductList(
-  "tents",
-  datasource,
-  document.querySelector(".product-list")
-);
-productList.init();
 loadHeaderFooter();
+const alert = new Alert(document.querySelector("main"));
+alert.init();
