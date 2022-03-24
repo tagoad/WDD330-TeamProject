@@ -161,7 +161,8 @@ button {
   list-style-type: none;
   padding: 0;
 }
-.product-list a {
+.product-list a,
+.cart_summary a {
   text-decoration: none;
   color: var(--dark-grey);
 }
@@ -294,6 +295,90 @@ footer {
   padding: 1em;
 }
 
+form {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+form .left {
+  flex: 1 1 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 5em;
+}
+
+form section {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+}
+
+form #cart-functions {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+form #cart-functions button {
+  height: 50%;
+  margin: 0 1em;
+}
+
+form #cart-functions span {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 1em;
+}
+
+form #cart-functions span h3 {
+  padding: 0 1em;
+  margin: 0;
+  text-align: left;
+}
+
+.shipping {
+  grid-column: 1;
+}
+
+.payment {
+  grid-column: 1;
+  justify-content: flex-start;
+}
+
+.summary {
+  grid-column: 2;
+  grid-row: 1/-1;
+}
+
+.form_group {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.form_group label {
+  width: 100%;
+  text-align: left;
+}
+
+.form_group input {
+  width: 100%;
+}
+
+section + button {
+  margin-top: 1em;
+}
+
 .flex-container {
   display: flex;
   flex-flow: row wrap;
@@ -313,4 +398,121 @@ footer {
 
 .alert-card p {
   margin: 0;
+}
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  color: white;
+  background-color: rgb(253, 110, 110);
+}
+
+.alert p {
+  margin: 0;
+  padding: 0;
+}
+
+.alert .close {
+  cursor: pointer;
+}
+
+.success {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  color: black;
+  background-color: lightgreen;
+}
+
+.success p {
+  margin: 0;
+  padding: 0;
+}
+
+.success .close {
+  cursor: pointer;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.login-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+#orders {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0.5em;
+}
+
+.order-card {
+  width: 30%;
+  background-color: beige;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0.5em;
+  overflow: hidden;
+}
+
+.order-card-header,
+.order-card-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  background-color: lightgray;
+}
+
+.order-card-footer {
+  justify-content: flex-end;
+}
+
+.order-card-header *,
+.order-card-footer * {
+  margin: 0;
+}
+
+.order-card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.order-card-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.order-card-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
 }

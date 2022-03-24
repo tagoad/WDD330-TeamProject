@@ -1,4 +1,4 @@
-import ProductData from "./productData.js";
+import ExternalServices from "./externalServices.js";
 import ProductList from "./productList.js";
 import {
   loadHeaderFooter,
@@ -8,7 +8,7 @@ import {
 } from "./utils.js";
 
 const category = getParams("category");
-const datasource = new ProductData(category);
+const datasource = new ExternalServices(category);
 const productList = new ProductList(
   category,
   datasource,

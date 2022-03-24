@@ -25,7 +25,6 @@ export default class Alert {
   }
 
   renderTemplate(template, alert) {
-    console.log(template);
     // Set Title
     var title = template.querySelector(".alert-card__title");
     title.innerHTML = alert.title;
