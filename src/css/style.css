@@ -435,3 +435,82 @@ section + button {
 .success .close {
   cursor: pointer;
 }
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.login-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+#orders {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0.5em;
+}
+
+.order-card {
+  width: 30%;
+  background-color: beige;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0.5em;
+  overflow: hidden;
+}
+
+.order-card-header, .order-card-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  background-color: lightgray;
+}
+
+.order-card-footer {
+  justify-content: flex-end;
+}
+
+.order-card-header *, .order-card-footer * {
+  margin: 0;
+}
+
+.order-card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.order-card-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.order-card-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}

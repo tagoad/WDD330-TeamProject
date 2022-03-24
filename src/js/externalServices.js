@@ -34,4 +34,26 @@ export default class ExternalServices {
       body: JSON.stringify(order),
     }).then(convertToJson);
   }
+
+  async loginRequest(email, password) {
+    const response = await fetch(baseURL + "login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    }).then(convertToJson)
+    return response.accessToken;
+  }
+
+  async getOrders(token) {
+    console.log(token)
+    return fetch(baseURL + "orders", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(convertToJson);
+  }
 }
