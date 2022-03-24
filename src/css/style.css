@@ -470,7 +470,8 @@ section + button {
   overflow: hidden;
 }
 
-.order-card-header, .order-card-footer {
+.order-card-header,
+.order-card-footer {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -484,7 +485,8 @@ section + button {
   justify-content: flex-end;
 }
 
-.order-card-header *, .order-card-footer * {
+.order-card-header *,
+.order-card-footer * {
   margin: 0;
 }
 

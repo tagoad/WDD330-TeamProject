@@ -42,12 +42,11 @@ export default class ExternalServices {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email, password: password }),
-    }).then(convertToJson)
+    }).then(convertToJson);
     return response.accessToken;
   }
 
   async getOrders(token) {
-    console.log(token)
     return fetch(baseURL + "orders", {
       method: "GET",
       headers: {
