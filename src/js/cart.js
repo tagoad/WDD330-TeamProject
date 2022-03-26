@@ -27,6 +27,11 @@ function getCartContents() {
   } else {
     document.querySelector("#cart-total").innerHTML = "";
   }
+  const cartCount = document.getElementById("cart_count");
+  if (cart && cartCount) {
+    const cartQty = cart.items.reduce((sum, item) => sum + item.qty, 0);
+    cartCount.innerHTML = cartQty;
+  }
 
   // Requires having feather linked in cart html
   feather.replace();
@@ -136,9 +141,8 @@ function clearCart() {
   setLocalStorage("so-cart", cart);
   getCartContents();
 }
-
-getCartContents();
 loadHeaderFooter();
+getCartContents();
 document
   .getElementById("clear-cart-button")
   .addEventListener("click", clearCart);

@@ -1,7 +1,5 @@
 module.exports = {
-  plugins: [
-    // ['@snowpack/plugin-sass' ],
-  ],
+  plugins: [["@snowpack/plugin-sass"]],
   mount: {
     src: "/",
   },

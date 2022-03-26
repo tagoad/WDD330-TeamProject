@@ -1,0 +1,90 @@
+.highlight {
+    color: $tertiary-color;
+}
+
+.discount {
+    color: red;
+}
+
+button {
+    padding: 0.5em 2em;
+    background-color: $secondary-color;
+    color: white;
+    margin: auto;
+    display: block;
+    border: 0;
+    font-size: $large-font;
+}
+
+.button.danger {
+    background-color: red;
+    &:hover {
+        background-color: darkred;
+    }
+}
+
+.icon {
+    cursor: pointer;
+    &.danger {
+        color: red;
+        &:hover {
+            color: darkred;
+        }
+    }
+    &.success {
+        color: green;
+        &:hover {
+            color: darkgreen;
+        }
+    }
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.divider {
+    border-bottom: 2px solid $primary-color;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.alert-card {
+    padding: 1em;
+    & h2, p {
+        margin: 0;
+    }
+}
+
+.alert_message {
+    &.alert {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em;
+        color: white;
+        background-color: rgb(253, 110, 110);
+    }
+    &.success {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em;
+        color: black;
+        background-color: lightgreen;
+    }
+    & p {
+        margin: 0;
+        padding: 0;
+    }
+    & .close {
+        cursor: pointer;
+    }
+}

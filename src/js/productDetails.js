@@ -22,8 +22,10 @@ export default class ProductDetails {
 
   addToCart() {
     //Check if so-cart exists in local storage
+    document.getElementById("cartbag").classList.add("added");
+    let cart = {}
     if (getLocalStorage("so-cart")) {
-      const cart = getLocalStorage("so-cart");
+      cart = getLocalStorage("so-cart");
       const index = cart.items.findIndex(
         (item) => item.item.Id === this.product.Id
       );
@@ -51,7 +53,7 @@ export default class ProductDetails {
       );
       setLocalStorage("so-cart", cart);
     } else {
-      const cart = {
+      cart = {
         items: [
           {
             item: this.product,
@@ -64,6 +66,12 @@ export default class ProductDetails {
         listTotal: this.product.ListPrice,
       };
       setLocalStorage("so-cart", cart);
+    }
+    if (cart) {
+      const cartCount = document.getElementById("cart_count");
+      // get quantity of items in cart
+      const cartQty = cart.items.reduce((sum, item) => sum + item.qty, 0);
+      cartCount.innerHTML = cartQty;
     }
     alertMessage("Added to cart!", "success");
   }

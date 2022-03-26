@@ -1,0 +1,75 @@
+form {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    & .left {
+        flex: 1 1 50%;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-bottom: 5em; 
+    }
+    & section {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        margin: 1em 0;
+    }
+    & #cart-functions {
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        & button {
+            height: 50%;
+        
+        }
+        & span {
+            display: flex;
+            flex-flow: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0 1em;
+            & h3 {
+                padding: 0 1em;
+                margin: 0;
+                text-align: left;
+            }
+        }
+    }
+}
+
+.shipping {
+    grid-column: 1;
+}
+
+.payment {
+    grid-column: 1;
+    justify-content: flex-start;
+}
+
+.summary {
+    grid-column: 2;
+    grid-row: 1/-1;
+}
+
+.form_group {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5em;
+    & label {
+        width: 100%;
+        
+    }
+    & input {
+        width: 100%;
+    }
+}
+
+section + button {
+    margin-top: 1em;
+}

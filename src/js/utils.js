@@ -46,9 +46,16 @@ export function renderListWithTemplate(
 export function loadHeaderFooter() {
   const header = document.getElementById("header");
   const footer = document.getElementById("footer");
-  loadTemplate("../partials/header.html").then((template) =>
-    renderWithTemplate(template, header)
-  );
+  loadTemplate("../partials/header.html")
+    .then((template) => renderWithTemplate(template, header))
+    .then(() => {
+      const cart = getLocalStorage("so-cart");
+      if (cart) {
+        const cartCount = document.getElementById("cart_count");
+        const cartQty = cart.items.reduce((sum, item) => sum + item.qty, 0);
+        cartCount.innerHTML = cartQty;
+      }
+    });
   loadTemplate("../partials/footer.html").then((template) =>
     renderWithTemplate(template, footer)
   );
@@ -90,8 +97,7 @@ export function addOrUpdateUrlParam(name, value) {
 export function alertMessage(message, alertType = "alert", scroll = true) {
   // create element to hold our alert
   const alert = document.createElement("div");
-  // add a class to style the alert
-  alert.classList.add(alertType);
+  alert.classList.add("alert_message", alertType);
   // set the contents. You should have a message and an X or something the user can click on to remove
   alert.innerHTML = `<p>${message}</p><p class="close">X</p>`;
 

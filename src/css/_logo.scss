@@ -1,0 +1,51 @@
+.logo {
+    line-height: 60px;
+    width: 245px;
+    overflow: hidden;
+    display: flex;
+    font-size: 30px;
+    text-align: right;
+    font-family: $font-headline;
+    & img {
+        width: 60px;
+        height: 60px;
+    }
+    & a {
+        text-decoration: none;
+        color: $primary-color;
+        &:visited {
+            color: $primary-color;
+        }
+    }
+}
+
+.hero {
+    position: relative;
+    & .logo {
+        position: absolute;
+        left: calc(50% - 60px);
+        bottom: -10px;
+        background-color: white;
+    }
+}
+
+.logo--square {
+    font-size: $small-font;
+    width: 110px;
+    height: 80px;
+
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 1px 1px 4px $light-grey;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    & img {
+        width: 90px;
+        height: 90px;
+        margin-top: -1.3em;
+    }
+    & > div {
+        margin-top: -1.7em;
+    }
+}
